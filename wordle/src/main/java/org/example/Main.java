@@ -7,19 +7,14 @@ import static org.example.Util.Result.*;
 public class Main {
     public static void main(String[] args) {
         //Generate random word from list
-        String randWord = Util.getRandomWord();
+        String generatedWord = Util.getRandomWord();
         int counter = 1;
-        boolean winner = false;
 
-        //Print generate message
-        System.out.println("**********************************");
-        System.out.println("******* WELCOME TO SHAN WORDLE ******");
-        System.out.println("**********************************");
-        System.out.println();
+        //print message
+        printGenericMessage();
 
         String userWord = null;
         while (counter != 7) {
-
             //take user input
             Scanner input = new Scanner(System.in);
             System.out.println();
@@ -28,26 +23,31 @@ public class Main {
 
 
             //check if input is valid
-            if (userWord.length() == 5) {
-                //check each index letter against each other
-                CompareIndexes(randWord, userWord);
+            if (checkUserInput(userWord)){
+                //compare the indexes and check if char in generated word
+                CompareCharByIndex(generatedWord, userWord);
                 counter += 1;
-            } else {
-                System.out.println("Word needs to be 5 letters");
             }
+
         }
         System.out.println();
-        System.out.println( "The word was " + randWord);
+        System.out.println( "The word was " + generatedWord);
     }
 
-    private static void CompareIndexes(String randWord, String userWord) {
-        //ArrayList<String> result = new ArrayList<>();
+    private static void printGenericMessage() {
+        System.out.println("**********************************");
+        System.out.println("******* WELCOME TO SHANTEL'S WORDLE ******");
+        System.out.println("**********************************");
+        System.out.println();
+    }
+
+    private static void CompareCharByIndex(String randWord, String userWord) {
         for(int i = 0; i <= randWord.length()-1; i++){
             String TemptChar = String.valueOf(userWord.charAt(i));
-            if(userWord.charAt(i) == randWord.charAt(i)){
+            if(userWord.charAt(i) == randWord.charAt(i)){       //check if index for both words are the same
                 System.out.print(Util.getFormattedLetter(userWord.charAt(i), HIT));
             }
-            else if(randWord.contains(TemptChar) == true) {  //optimise to account for letters that were already
+            else if(randWord.contains(TemptChar) == true) {  //NOTE: optimise to account for letters that were already USED
                 System.out.print(Util.getFormattedLetter(userWord.charAt(i), SEMI_HIT));
             }
             else if(randWord.contains(TemptChar) == false) {
@@ -56,14 +56,14 @@ public class Main {
         }
     }
 
-    private static int checkUserInput(String userWord, int counter) {
+    private static boolean checkUserInput(String userWord) {
         if(userWord.length()== 5){
-            return  counter+=1;
+            return true;
         }
         else {
             System.out.println("Word needs to be 5 letters");
         }
-        return counter;
+        return false;
     }
 }
 
@@ -71,5 +71,5 @@ public class Main {
 //input 5 letterword from user -hoads
 //check each index letter against each other
 //fif the leter in have same index return Hit,
-// If not same but in work return Semi_hit,
+// If not same but in word return Semi_hit,
 // if not in word return Miss
