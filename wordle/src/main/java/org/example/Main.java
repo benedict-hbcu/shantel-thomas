@@ -8,11 +8,17 @@ public class Main {
     public static void main(String[] args) {
         //Generate random word from list
         String generatedWord = Util.getRandomWord();
-        int counter = 1;
+
 
         //print message
         printGenericMessage();
 
+        System.out.println(wordle(generatedWord));
+
+    }
+
+    private static String wordle(String generatedWord) {
+        int counter = 1;
         String userWord = null;
         while (counter != 7) {
             //take user input
@@ -23,28 +29,42 @@ public class Main {
 
 
             //check if input is valid
-            if (checkUserInput(userWord)){
+            if (userWord.length() ==5){
+                int forWin =0;
                 //compare the indexes and check if char in generated word
-                CompareCharByIndex(generatedWord, userWord);
+                forWin += CompareCharByIndex(generatedWord, userWord, forWin);
                 counter += 1;
+
+                if(forWin ==5 ){
+                    return winnerMessage();
+
+                }
+            } else {
+                System.out.println("Word needs to be 5 letters");
             }
 
         }
+        System.out.println("");
+        return "The word was " + generatedWord;
+    }
+
+    private static String winnerMessage() {
         System.out.println();
-        System.out.println( "The word was " + generatedWord);
+        return "**************** CONGRATULATIONS YOU WON ****************";
     }
 
     private static void printGenericMessage() {
-        System.out.println("**********************************");
+        System.out.println("******************************************");
         System.out.println("******* WELCOME TO SHANTEL'S WORDLE ******");
-        System.out.println("**********************************");
+        System.out.println("******************************************");
         System.out.println();
     }
 
-    private static void CompareCharByIndex(String randWord, String userWord) {
+    private static int CompareCharByIndex(String randWord, String userWord, int forWin) {
         for(int i = 0; i <= randWord.length()-1; i++){
             String TemptChar = String.valueOf(userWord.charAt(i));
             if(userWord.charAt(i) == randWord.charAt(i)){       //check if index for both words are the same
+                forWin += 1;
                 System.out.print(Util.getFormattedLetter(userWord.charAt(i), HIT));
             }
             else if(randWord.contains(TemptChar) == true) {  //NOTE: optimise to account for letters that were already USED
@@ -54,22 +74,7 @@ public class Main {
                 System.out.print(Util.getFormattedLetter(userWord.charAt(i), MISS));
             }
         }
-    }
-
-    private static boolean checkUserInput(String userWord) {
-        if(userWord.length()== 5){
-            return true;
-        }
-        else {
-            System.out.println("Word needs to be 5 letters");
-        }
-        return false;
+        return forWin;
     }
 }
 
-//Generate random word from list  - lover
-//input 5 letterword from user -hoads
-//check each index letter against each other
-//fif the leter in have same index return Hit,
-// If not same but in word return Semi_hit,
-// if not in word return Miss
