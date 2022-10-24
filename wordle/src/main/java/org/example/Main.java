@@ -13,7 +13,6 @@ public class Main {
         printGenericMessage();
         System.out.println(wordle(generatedWord));
     }
-
     private static String wordle(String generatedWord) {
         int counter = 1;
         while (counter != 7) {
