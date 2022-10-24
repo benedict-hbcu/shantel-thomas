@@ -9,12 +9,10 @@ public class Main {
         //Generate random word from list
         String generatedWord = Util.getRandomWord();
 
-
         //print message
         printGenericMessage();
 
         System.out.println(wordle(generatedWord));
-
     }
 
     private static String wordle(String generatedWord) {
