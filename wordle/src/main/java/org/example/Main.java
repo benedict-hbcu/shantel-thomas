@@ -26,6 +26,7 @@ public class Main {
             //check if input is valid
             if (userWord.length() ==5){
                 int forWin =0;
+
                 //compare the indexes and check if char in generated word
                 forWin += CompareCharByIndex(generatedWord, userWord, forWin);
                 counter += 1;
