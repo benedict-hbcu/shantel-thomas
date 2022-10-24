@@ -16,13 +16,12 @@ public class Main {
 
     private static String wordle(String generatedWord) {
         int counter = 1;
-        String userWord = null;
         while (counter != 7) {
             //take user input
             Scanner input = new Scanner(System.in);
             System.out.println();
             System.out.println("Type your 5 letter word (attempt " + counter + " of 6):");
-            userWord = input.nextLine().toLowerCase();
+            String userWord = input.nextLine().toLowerCase();
 
             //check if input is valid
             if (userWord.length() ==5){
@@ -37,9 +36,8 @@ public class Main {
             } else {
                 System.out.println("Word needs to be 5 letters");
             }
-
         }
-        System.out.println("");
+        System.out.println(" ");
         return "The word was " + generatedWord;
     }
 
