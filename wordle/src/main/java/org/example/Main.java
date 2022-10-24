@@ -11,7 +11,6 @@ public class Main {
 
         //print message
         printGenericMessage();
-
         System.out.println(wordle(generatedWord));
     }
 
@@ -25,7 +24,6 @@ public class Main {
             System.out.println("Type your 5 letter word (attempt " + counter + " of 6):");
             userWord = input.nextLine().toLowerCase();
 
-
             //check if input is valid
             if (userWord.length() ==5){
                 int forWin =0;
@@ -35,7 +33,6 @@ public class Main {
 
                 if(forWin ==5 ){
                     return winnerMessage();
-
                 }
             } else {
                 System.out.println("Word needs to be 5 letters");
