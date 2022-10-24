@@ -1,7 +1,6 @@
 package org.example;
 
 import java.util.Scanner;
-
 import static org.example.Util.Result.*;
 
 public class Main {
@@ -9,7 +8,6 @@ public class Main {
         //Generate random word from list
         String generatedWord = Util.getRandomWord();
 
-        //print message
         printGenericMessage();
         System.out.println(wordle(generatedWord));
     }
@@ -26,10 +24,12 @@ public class Main {
             if (userWord.length() ==5){
                 int forWin =0;
 
-                //compare the indexes and check if char in generated word
+                //increment if the letter is a HIT
+                // compare the indexes and check if char in generated word
                 forWin += CompareCharByIndex(generatedWord, userWord, forWin);
                 counter += 1;
 
+                //check it the player has all 5 letters right
                 if(forWin ==5 ){
                     return winnerMessage();
                 }
